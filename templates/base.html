@@ -1,0 +1,17 @@
+{# templates/base.html #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Student Attendance Management System{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+    <main>
+        {% block content %}Student Attendance Management System{% endblock %}
+    </main>
+</body>
+</html>
