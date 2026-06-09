@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Classes</h1>
+<a href="{% url 'class_create' %}" class="btn btn-primary mb-3">Add New Class</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Class Name</th>
+            <th>Capacity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for class_room in classes %}
+        <tr>
+            <td>{{ class_room.class_name }}</td>
+            <td>{{ class_room.capacity }}</td>
+            <td>
+                <a href="{% url 'class_detail' pk=class_room.id %}" class="btn btn-sm btn-info">View</a>
+                <a href="{% url 'class_delete' pk=class_room.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

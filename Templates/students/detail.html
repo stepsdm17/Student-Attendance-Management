@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Student Details</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+                <p><strong>Name:</strong> {{ student.first_name }} {{ student.last_name }}</p>
+                <p><strong>Email:</strong> {{ student.email }}</p>
+                <p><strong>Phone:</strong> {{ student.phone }}</p>
+                <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
+                <p><strong>Class:</strong> {{ student.class_room }}</p>
+                <p><strong>Created:</strong> {{ student.created_at }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'student_edit' pk=student.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'student_delete' pk=student.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'student_list' %}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

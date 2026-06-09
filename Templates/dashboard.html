@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Students</h5>
+                <h2>{{ total_students }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Classes</h5>
+                <h2>{{ total_classes }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Subjects</h5>
+                <h2>{{ total_subjects }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Teachers</h5>
+                <h2>{{ total_teachers }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Total Attendance Sessions</h4>
+            </div>
+            <div class="card-body">
+                <h2>{{ total_attendance }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Today's Attendance</h4>
+            </div>
+            <div class="card-body">
+                <h2>{{ today_attendance }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Quick Actions</h4>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'student_create' %}" class="btn btn-primary">Add New Student</a>
+                <a href="{% url 'class_create' %}" class="btn btn-primary">Add New Class</a>
+                <a href="{% url 'subject_create' %}" class="btn btn-primary">Add New Subject</a>
+                <a href="{% url 'teacher_create' %}" class="btn btn-primary">Add New Teacher</a>
+                <a href="{% url 'attendance_create' %}" class="btn btn-primary">Create Attendance Session</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

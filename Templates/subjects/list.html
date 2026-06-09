@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Subjects</h1>
+<a href="{% url 'subject_create' %}" class="btn btn-primary mb-3">Add New Subject</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{ subject.subject_name }}</td>
+            <td>{{ subject.code }}</td>
+            <td>{{ subject.description }}</td>
+            <td>
+                <a href="{% url 'subject_detail' pk=subject.id %}" class="btn btn-sm btn-info">View</a>
+                <a href="{% url 'subject_delete' pk=subject.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

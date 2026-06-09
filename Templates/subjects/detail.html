@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Subject Details</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Subject Name:</strong> {{ subject.subject_name }}</p>
+                <p><strong>Code:</strong> {{ subject.code }}</p>
+                <p><strong>Description:</strong> {{ subject.description }}</p>
+                <p><strong>Created:</strong> {{ subject.created_at }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'subject_delete' pk=subject.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'subject_list' %}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

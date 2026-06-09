@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Create New Attendance Session</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.session_date.id_for_label }}" class="form-label">Session
+                                    Date</label>
+                                {{ form.session_date }}
+                                {% if form.session_date.errors %}
+                                <div class="text-danger">{{ form.session_date.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.class_room.id_for_label }}" class="form-label">Class</label>
+                                {{ form.class_room }}
+                                {% if form.class_room.errors %}
+                                <div class="text-danger">{{ form.class_room.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.subject.id_for_label }}" class="form-label">Subject</label>
+                                {{ form.subject }}
+                                {% if form.subject.errors %}
+                                <div class="text-danger">{{ form.subject.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.teacher.id_for_label }}" class="form-label">Teacher</label>
+                                {{ form.teacher }}
+                                {% if form.teacher.errors %}
+                                <div class="text-danger">{{ form.teacher.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Attendance Session</button>
+                    <a href="{% url 'attendance_list' %}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

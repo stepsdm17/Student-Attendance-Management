@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Teacher Details</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Employee ID:</strong> {{ teacher.employee_id }}</p>
+                <p><strong>Name:</strong> {{ teacher.first_name }} {{ teacher.last_name }}</p>
+                <p><strong>Email:</strong> {{ teacher.email }}</p>
+                <p><strong>Phone:</strong> {{ teacher.phone }}</p>
+                <p><strong>Hire Date:</strong> {{ teacher.hire_date }}</p>
+                <p><strong>Subjects:</strong>
+                    {% for subject in teacher.subjects.all %}
+                    <span class="badge bg-secondary">{{ subject.subject_name }}</span>
+                    {% endfor %}
+                </p>
+                <p><strong>Created:</strong> {{ teacher.created_at }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'teacher_delete' pk=teacher.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'teacher_list' %}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

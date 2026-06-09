@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Create New Class</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.class_name.id_for_label }}" class="form-label">Class Name</label>
+                                {{ form.class_name }}
+                                {% if form.class_name.errors %}
+                                <div class="text-danger">{{ form.class_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.capacity.id_for_label }}" class="form-label">Capacity</label>
+                        {{ form.capacity }}
+                        {% if form.capacity.errors %}
+                        <div class="text-danger">{{ form.capacity.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Class</button>
+                    <a href="{% url 'class_list' %}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

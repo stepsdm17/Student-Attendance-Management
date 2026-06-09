@@ -78,3 +78,4 @@ class AttendanceDetail(models.Model):
 
     def str(self):
         return f"{self.student} - {self.status}"
+
