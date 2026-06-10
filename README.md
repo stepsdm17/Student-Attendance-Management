@@ -1,9 +1,8 @@
 
 # Student Attendance Management
 
-    A simple Student Attendance Management System built with Django to manage a student attendance system. The project allows CRUD operations for **students**, **classes**, **subjects**, and **attendance** using relational tables.
+    A simple Student Attendance Management System built with Django to manage a student attendance system. The project allows CRUD operations for **students**, **classes**, **subjects**, **teachers**, **attendance and **attendance_detail** using relational tables.
 
----
 
 ## Features
 
@@ -14,7 +13,6 @@
 - **Attendance Management**: Create, list, view, update, and delete attendance.
 - **Authentication**: User authentication and logout.
 
----
 
 ## Tech Stack
 
@@ -30,7 +28,7 @@
 - **PyJWT**
 - **Bootstrap or basic CSS**
 
----
+
 
 ## Project Structure
 
@@ -143,14 +141,58 @@ Ensure you test all CRUD operations for each resource:
 27. View attendance session detail
 28. Update attendance session
 29. Delete attendance session
----
+
 
 ## Model relationships
-- Student has one to many relationship with attendance
-- Class has one to many relationship with student
-- Subject has one to many relationship with attendance
-- Teacher has one to many relationship with attendance
-...
+
+| Model          | Key Relationships                                                                 |
+|----------------|-----------------------------------------------------------------------------------|
+| **Class**      | → Many `Student`<br>→ Many `Attendance`                                             |
+| **Student**    | → One `Class`<br>→ Many `AttendanceDetail`                                          |
+| **Subject**    | ↔ Many `Teacher` (Many-to-Many)<br>→ Many `Attendance`                            |
+| **Teacher**    | ↔ Many `Subject` (Many-to-Many)<br>→ Many `Attendance`                             |
+| **Attendance** | → One `Class`<br>→ One `Subject`<br>→ One `Teacher`<br>→ Many `AttendanceDetail`    |
+| **AttendanceDetail** | → One `Attendance`<br>→ One `Student`   
+
+### Class Model
+
+Relationships:
+- One-to-Many with Student: Each class can have multiple students.
+- One-to-Many with Attendance: Each class can have multiple attendance sessions.
+
+### Student Model
+
+Relationships:
+- Many-to-One with Class: Each student belongs to one class (class_room).
+- One-to-Many with AttendanceDetail: Each student can have multiple attendance records.
+
+### Subject Model
+
+Relationships:
+- Many-to-Many with Teacher: A subject can be taught by multiple teachers, and a teacher can teach multiple subjects.
+- One-to-Many with Attendance: Each subject can have multiple attendance sessions.
+
+### Teacher Model
+
+Relationships:
+- Many-to-Many with Subject: A teacher can teach multiple subjects (and vice versa).
+One-to-Many with Attendance: Each teacher can conduct multiple attendance sessions.
+
+### Attendance Model
+
+Relationships:
+- Many-to-One with Class: Each attendance session is linked to one class.
+- Many-to-One with Subject: Each session is for one subject.
+- Many-to-One with Teacher: Each session is conducted by one teacher.
+- One-to-Many with AttendanceDetail: Each session has multiple student attendance records.
+
+### AttendanceDetail Model
+
+Relationships:
+- Many-to-One with Attendance: Each detail record belongs to one attendance session.
+- Many-to-One with Student: Each record is for one student.
+
+---
 
 ## Author of this project
 
