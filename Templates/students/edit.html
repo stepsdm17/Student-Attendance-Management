@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 mx-auto align-content-center w-800">
         <div class="card">
             <div class="card-header">
                 <h4>Edit Student</h4>
@@ -60,8 +60,6 @@
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="{{ form.date_of_birth.id_for_label }}" class="form-label">Date of
@@ -72,6 +70,8 @@
                                 {% endif %}
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="{{ form.class_room.id_for_label }}" class="form-label">Class</label>
@@ -82,8 +82,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Student</button>
-                    <a href="{% url 'student_detail' pk=student.id %}" class="btn btn-secondary">Cancel</a>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Update Student</button>
+                        <a href="{% url 'student_list'%}" class="btn btn-secondary">Cancel</a>
+                    </div>
                 </form>
             </div>
         </div>

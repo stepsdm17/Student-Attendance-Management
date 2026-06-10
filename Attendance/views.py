@@ -83,14 +83,14 @@ def student_create(request):
 def student_edit(request, pk):
     student = get_object_or_404(Student, pk=pk)
     if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
+        form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Student updated successfully')
-            return redirect('student_detail', pk=pk)
+            return redirect('student_detail')
     else:
         form = StudentForm(instance=student)
-    return render(request, 'students/edit.html', {'form': form})
+    return render(request, 'students/edit.html', {'form': form, 'student': student})
 
 @login_required
 def student_delete(request, pk):
@@ -111,6 +111,7 @@ def class_list(request):
 def class_detail(request, pk):
     class_room = get_object_or_404(Class, pk=pk)
     return render(request, 'classes/detail.html', {'class_room': class_room})
+
 
 @login_required
 def class_create(request):
@@ -208,6 +209,7 @@ def attendance_detail(request, pk):
     attendance = get_object_or_404(Attendance, pk=pk)
     details = AttendanceDetail.objects.filter(attendance=attendance)
     return render(request, 'attendance/detail.html', {'attendance': attendance, 'details': details})
+
 
 @login_required
 def attendance_create(request):

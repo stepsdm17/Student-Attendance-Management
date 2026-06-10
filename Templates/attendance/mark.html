@@ -1,51 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container my-4" >
-    <div class="card shadow-sm border-0 mb-4 bg-light">
-        <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <div>
-                <h1 class="h3 mb-1 text-primary fw-bold">Mark Attendance</h1>
-                <p class="text-muted mb-0 fs-5">
-                    <span class="badge bg-secondary me-2">{{ attendance.class_room }}</span>
-                    <span class="fw-semibold text-dark">{{ attendance.subject }}</span>
-                </p>
-            </div>
-            <div class="text-end">
-                <span class="text-muted d-block small text-uppercase fw-bold">Session Date</span>
-                <span class="badge bg-dark fs-6 py-2 px-3"><i class="bi bi-calendar3 me-1"></i> {{ attendance.session_date }}</span>
-            </div>
+<!-- Session Summary Card -->
+<div class="card mb-4">
+    <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+            <h1 class="h3 mb-1 text-primary-custom">Mark Attendance</h1>
+            <p class="text-secondary mb-0">
+                <span class="badge bg-secondary me-2">{{ attendance.class_room }}</span>
+                <strong>{{ attendance.subject }}</strong>
+            </p>
+        </div>
+        <div class="text-end">
+            <label class="form-label d-block">Session Date</label>
+            <span class="badge bg-secondary fs-6 py-2 px-3">{{ attendance.session_date }}</span>
         </div>
     </div>
+</div>
 
-    <form method="post" class="needs-validation" novalidate>
-        {% csrf_token %}
-        
-        <div class="card shadow-sm border-0 overflow-hidden">
+<form method="post">
+    {% csrf_token %}
+
+    <div class="card">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="table-primary text-uppercase fs-7 border-bottom">
+                <table class="table mb-0">
+                    <thead>
                         <tr>
-                            <th scope="col" class="ps-4" style="width: 30%;">Student Name</th>
-                            <th scope="col" style="width: 40%;">Attendance Status</th>
-                            <th scope="col" class="pe-4" style="width: 30%;">Notes / Remarks</th>
+                            <th style="width: 30%;">Student Name</th>
+                            <th style="width: 40%;">Attendance Status</th>
+                            <th style="width: 30%;">Notes / Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for detail in details %}
                         <tr>
-                            <td class="ps-4 fw-semibold text-dark">
+                            <td class="fw-semibold">
                                 {{ detail.student.first_name }} {{ detail.student.last_name }}
                             </td>
                             <td>
                                 <div class="d-flex flex-wrap gap-2">
                                     {% for choice in detail.STATUS_CHOICES %}
-                                    <div class="btn-group-toggle">
+                                    <div>
                                         <input type="radio" class="btn-check" name="status_{{ detail.id }}"
-                                            id="status_{{ detail.id }}_{{ choice.0 }}" value="{{ choice.0 }}" 
+                                            id="status_{{ detail.id }}_{{ choice.0 }}" value="{{ choice.0}}"
                                             {% if detail.status == choice.0 %}checked{% endif %} autocomplete="off">
-                                        
-                                        <label class="btn btn-sm btn-outline-secondary px-3 rounded-pill transition-all" 
+                                        <label class="btn btn-sm btn-outline-secondary rounded-pill"
                                             for="status_{{ detail.id }}_{{ choice.0 }}">
                                             {{ choice.1 }}
                                         </label>
@@ -53,37 +53,29 @@
                                     {% endfor %}
                                 </div>
                             </td>
-                            
-                            <td class="pe-4">
-                                <input type="text" class="form-control form-control-sm border-light-subtle rounded bg-light-focus" 
-                                       name="notes_{{ detail.id }}" value="{{ detail.notes|default_if_none:'' }}" 
-                                       placeholder="Add note if any...">
+                            <td>
+                                <input type="text" class="form-control form-control-sm"
+                                       name="notes_{{ detail.id }}" value="{{ detail.notes|default_if_none:'' }}"
+                                       placeholder="Add note...">
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-            
-            <div class="card-footer bg-white border-top-0 d-flex justify-content-end p-4">
-                <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm fw-bold">
-                    <i class="bi bi-check-circle me-2"></i> Save Attendance
-                </button>
-            </div>
         </div>
-    </form>
-</div>
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <a href="{% url 'attendance_detail' pk=attendance.id %}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save Attendance</button>
+        </div>
+    </div>
+</form>
 
- <style>
-    .fs-7 { font-size: 0.85rem; }
-    .transition-all { transition: all 0.2s ease-in-out; }
-    .bg-light-focus:focus { background-color: #fff !important; border-color: #86b7fe !important; }
-    
+<style>
     .btn-check:checked + .btn-outline-secondary {
-        background-color: #0d6efd !important;
-        border-color: #0d6efd !important;
-        color: #fff !important;
-        box-shadow: 0 4px 6px rgba(13, 110, 253, 0.15);
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border-color: var(--primary-color);
+        color: #fff;
     }
-</style> 
+</style>
 {% endblock %}

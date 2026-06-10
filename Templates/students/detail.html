@@ -2,21 +2,44 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 mx-auto align-content-center w-800">
         <div class="card">
             <div class="card-header">
                 <h4>Student Details</h4>
             </div>
             <div class="card-body">
-                <p><strong>Student ID:</strong> {{ student.student_id }}</p>
-                <p><strong>Name:</strong> {{ student.first_name }} {{ student.last_name }}</p>
-                <p><strong>Email:</strong> {{ student.email }}</p>
-                <p><strong>Phone:</strong> {{ student.phone }}</p>
-                <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
-                <p><strong>Class:</strong> {{ student.class_room }}</p>
-                <p><strong>Created:</strong> {{ student.created_at }}</p>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Student ID</label>
+                        <p><span class="badge bg-secondary">{{ student.student_id }}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name</label>
+                        <p>{{ student.first_name }} {{ student.last_name }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <p>{{ student.email }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone</label>
+                        <p>{{ student.phone }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Date of Birth</label>
+                        <p>{{ student.date_of_birth }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Class</label>
+                        <p>{{ student.class_room }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Created</label>
+                        <p>{{ student.created_at|date:"M d, Y" }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex gap-2">
                 <a href="{% url 'student_edit' pk=student.id %}" class="btn btn-warning">Edit</a>
                 <a href="{% url 'student_delete' pk=student.id %}" class="btn btn-danger">Delete</a>
                 <a href="{% url 'student_list' %}" class="btn btn-secondary">Back to List</a>

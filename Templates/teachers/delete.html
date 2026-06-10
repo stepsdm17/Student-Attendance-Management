@@ -2,16 +2,17 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-6 mx-auto" style="margin-top: 47px;margin-bottom: 20px; width: 800px;">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h4>Delete Teacher</h4>
             </div>
             <div class="card-body">
-                <p>Are you sure you want to delete the teacher <strong>{{ teacher.first_name }} {{ teacher.last_name
-                        }}</strong>?</p>
-                <p>This action cannot be undone.</p>
-                <form method="post">
+                <div class="alert alert-danger">
+                    Are you sure you want to delete teacher <strong>{{ teacher.first_name }} {{ teacher.last_name }}</strong>?
+                    This action <strong>cannot be undone</strong>.
+                </div>
+                <form method="post" class="d-flex gap-2">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Yes, Delete</button>
                     <a href="{% url 'teacher_detail' pk=teacher.id %}" class="btn btn-secondary">Cancel</a>

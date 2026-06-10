@@ -1,60 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Dashboard</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary-custom">Dashboard</h1>
+    <span class="text-secondary">Welcome, <strong>{{ user.username }}</strong></span>
+</div>
 
-<div class="row">
+<div class="row g-4">
     <div class="col-md-3">
-        <div class="card bg-primary text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Students</h5>
+        <div class="dashboard-card">
+            <div class="card-body text-center">
+
+                <p class="card-title">Total Students</p>
                 <h2>{{ total_students }}</h2>
+                <a href="{% url 'student_list' %}" class="btn btn-primary btn-sm mt-3">View All</a>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card bg-success text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Classes</h5>
+        <div class="dashboard-card">
+            <div class="card-body text-center">
+
+                <p class="card-title">Total Classes</p>
                 <h2>{{ total_classes }}</h2>
+                <a href="{% url 'class_list' %}" class="btn btn-primary btn-sm mt-3">View All</a>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card bg-info text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Subjects</h5>
+        <div class="dashboard-card">
+            <div class="card-body text-center">
+
+                <p class="card-title">Total Subjects</p>
                 <h2>{{ total_subjects }}</h2>
+                <a href="{% url 'subject_list' %}" class="btn btn-primary btn-sm mt-3">View All</a>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card bg-warning text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Teachers</h5>
+        <div class="dashboard-card">
+            <div class="card-body text-center">
+
+                <p class="card-title">Total Teachers</p>
                 <h2>{{ total_teachers }}</h2>
+                <a href="{% url 'teacher_list' %}" class="btn btn-primary btn-sm mt-3">View All</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row mt-4">
+<div class="row mt-4 g-4">
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h4>Total Attendance Sessions</h4>
-            </div>
-            <div class="card-body">
+        <div class="dashboard-card">
+            <div class="card-body text-center">
+
+                <p class="card-title">Total Attendance Sessions</p>
                 <h2>{{ total_attendance }}</h2>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h4>Today's Attendance</h4>
-            </div>
-            <div class="card-body">
+        <div class="dashboard-card">
+            <div class="card-body text-center">
+
+                <p class="card-title">Today's Attendance</p>
                 <h2>{{ today_attendance }}</h2>
             </div>
         </div>
@@ -67,12 +76,12 @@
             <div class="card-header">
                 <h4>Quick Actions</h4>
             </div>
-            <div class="card-body">
-                <a href="{% url 'student_create' %}" class="btn btn-primary">Add New Student</a>
-                <a href="{% url 'class_create' %}" class="btn btn-primary">Add New Class</a>
-                <a href="{% url 'subject_create' %}" class="btn btn-primary">Add New Subject</a>
-                <a href="{% url 'teacher_create' %}" class="btn btn-primary">Add New Teacher</a>
-                <a href="{% url 'attendance_create' %}" class="btn btn-primary">Create Attendance Session</a>
+            <div class="card-body d-flex flex-wrap gap-2">
+                <a href="{% url 'student_create' %}" class="btn btn-primary">+ Add Student</a>
+                <a href="{% url 'class_create' %}" class="btn btn-primary">+ Add Class</a>
+                <a href="{% url 'subject_create' %}" class="btn btn-primary">+ Add Subject</a>
+                <a href="{% url 'teacher_create' %}" class="btn btn-primary">+ Add Teacher</a>
+                <a href="{% url 'attendance_create' %}" class="btn btn-success">+ Create Attendance Session</a>
             </div>
         </div>
     </div>

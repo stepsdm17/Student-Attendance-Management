@@ -2,25 +2,50 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8 mx-auto" style="margin-top: 47px;margin-bottom: 20px; width: 1000px;">
+    <div class="col-md-8 mx-auto align-content-center w-800">
         <div class="card">
             <div class="card-header">
                 <h4>Teacher Details</h4>
             </div>
             <div class="card-body">
-                <p><strong>Employee ID:</strong> {{ teacher.employee_id }}</p>
-                <p><strong>Name:</strong> {{ teacher.first_name }} {{ teacher.last_name }}</p>
-                <p><strong>Email:</strong> {{ teacher.email }}</p>
-                <p><strong>Phone:</strong> {{ teacher.phone }}</p>
-                <p><strong>Hire Date:</strong> {{ teacher.hire_date }}</p>
-                <p><strong>Subjects:</strong>
-                    {% for subject in teacher.subjects.all %}
-                    <span class="badge bg-secondary">{{ subject.subject_name }}</span>
-                    {% endfor %}
-                </p>
-                <p><strong>Created:</strong> {{ teacher.created_at }}</p>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Employee ID</label>
+                        <p><span class="badge bg-secondary">{{ teacher.employee_id }}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name</label>
+                        <p>{{ teacher.first_name }} {{ teacher.last_name }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <p>{{ teacher.email }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone</label>
+                        <p>{{ teacher.phone }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Hire Date</label>
+                        <p>{{ teacher.hire_date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Created</label>
+                        <p>{{ teacher.created_at|date:"M d, Y" }}</p>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Subjects</label>
+                        <p>
+                            {% for subject in teacher.subjects.all %}
+                            <span class="badge bg-secondary">{{ subject.subject_name }}</span>
+                            {% empty %}
+                            <span class="text-secondary">No subjects assigned</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex gap-2">
                 <a href="{% url 'teacher_delete' pk=teacher.id %}" class="btn btn-danger">Delete</a>
                 <a href="{% url 'teacher_list' %}" class="btn btn-secondary">Back to List</a>
             </div>

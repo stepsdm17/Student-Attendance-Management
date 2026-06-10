@@ -1,34 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Subjects</h1>
-<hr style="margin: 20px 0;">
-<div class="d-flex justify-content-end">
-<a href="{% url 'subject_create' %}" class="btn btn-primary mb-3">Add New Subject</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary-custom">Subjects</h1>
+    <a href="{% url 'subject_create' %}" class="btn btn-primary">+ Add New Subject</a>
 </div>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Subject Name</th>
-            <th>Code</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for subject in subjects %}
-        <tr>
-            <td>{{ subject.subject_name }}</td>
-            <td>{{ subject.code }}</td>
-            <td>{{ subject.description }}</td>
-            <td>
-                <div class="d-flex gap-2">
-                <a href="{% url 'subject_detail' pk=subject.id %}" class="btn btn-sm btn-info">View</a>
-                <a href="{% url 'subject_delete' pk=subject.id %}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.subject_name }}</td>
+                    <td>{{ subject.code }}</td>
+                    <td>{{ subject.description|default:"-" }}</td>
+                    <td class="d-flex gap-1">
+                        <a href="{% url 'subject_detail' pk=subject.id %}" class="btn btn-sm btn-info">View</a>
+                        <a href="{% url 'subject_delete' pk=subject.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-secondary py-4">No subjects found. <a href="{% url 'subject_create' %}">Add
+                            one now.</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

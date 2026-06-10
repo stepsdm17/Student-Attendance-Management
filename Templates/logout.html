@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
+<div class="row justify-content-center" style="margin-top: 60px;">
+    <div class="col-md-5">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header text-center">
                 <h4>Logout</h4>
             </div>
-            <div class="card-body">
-                <form method="post">
+            <div class="card-body text-center">
+                <p class="mb-3">Logged in as <strong>{{ user.username }}</strong></p>
+                <p class="text-secondary mb-4">Are you sure you want to logout?</p>
+                <form method="post" class="d-flex gap-2 justify-content-center">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username:{{ user.username }}</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Logout</button>
+                    <button type="submit" class="btn btn-danger">Yes, Logout</button>
                     <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 {% endblock %}

@@ -1,67 +1,83 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-8 mx-auto" style="margin-top: 47px;margin-bottom: 20px; width: 1000px;" >
-        <div class="card">
-            <div class="card-header">
-                <h4>Attendance Details</h4>
+<!-- Session Info Card -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h4>Attendance Details</h4>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Date</label>
+                <p>{{ attendance.session_date }}</p>
             </div>
-            <div class="card-body">
-                <p><strong>Date:</strong> {{ attendance.session_date }}</p>
-                <p><strong>Class:</strong> {{ attendance.class_room }}</p>
-                <p><strong>Subject:</strong> {{ attendance.subject }}</p>
-                <p><strong>Teacher:</strong> {{ attendance.teacher }}</p>
-                <p><strong>Status:</strong>
-                    <span
-                        class="badge bg-{% if attendance.status == 'completed' %}success{% elif attendance.status == 'ongoing' %}warning{% else %}secondary{% endif %}">
+            <div class="col-md-3">
+                <label class="form-label">Class</label>
+                <p>{{ attendance.class_room }}</p>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Subject</label>
+                <p>{{ attendance.subject }}</p>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Teacher</label>
+                <p>{{ attendance.teacher }}</p>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Status</label>
+                <p>
+                    <span class="badge bg-{% if attendance.status == 'completed' %}success{% elif attendance.status == 'ongoing' %}warning{% else %}secondary{% endif %}">
                         {{ attendance.get_status_display }}
                     </span>
                 </p>
-                <p><strong>Created:</strong> {{ attendance.created_at }}</p>
             </div>
-            <div class="card-footer">
-                {% if attendance.status == 'scheduled' %}
-                <a href="{% url 'mark_attendance' pk=attendance.id %}" class="btn btn-primary">Mark Attendance</a>
-                {% endif %}
-                <a href="{% url 'attendance_list' %}" class="btn btn-secondary">Back to List</a>
+            <div class="col-md-3">
+                <label class="form-label">Created</label>
+                <p>{{ attendance.created_at|date:"M d, Y" }}</p>
             </div>
         </div>
     </div>
+    <div class="card-footer d-flex gap-2">
+        {% if attendance.status == 'scheduled' %}
+        <a href="{% url 'mark_attendance' pk=attendance.id %}" class="btn btn-primary">Mark Attendance</a>
+        {% endif %}
+        <a href="{% url 'attendance_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-12 mx-auto" style="margin-top: 47px;margin-bottom: 20px; width: 1000px;" >
-        <div class="card">
-            <div class="card-header">
-                <h4>Attendance Records</h4>
-            </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Student</th>
-                            <th>Status</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for detail in details %}
-                        <tr>
-                            <td>{{ detail.student.first_name }} {{ detail.student.last_name }}</td>
-                            <td>
-                                <span
-                                    class="badge bg-{% if detail.status == 'present' %}success{% elif detail.status == 'absent' %}danger{% elif detail.status == 'late' %}warning{% else %}secondary{% endif %}">
-                                    {{ detail.get_status_display }}
-                                </span>
-                            </td>
-                            <td>{{ detail.notes }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<!-- Attendance Records Table -->
+<div class="card">
+    <div class="card-header">
+        <h4>Attendance Records</h4>
+    </div>
+    <div class="card-body p-0">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in details %}
+                <tr>
+                    <td>{{ detail.student.first_name }} {{ detail.student.last_name }}</td>
+                    <td>
+                        <span class="badge bg-{% if detail.status == 'present' %}success{% elif detail.status == 'absent' %}danger{% elif detail.status == 'late' %}warning{% else %}secondary{% endif %}">
+                            {{ detail.get_status_display }}
+                        </span>
+                    </td>
+                    <td>{{ detail.notes|default:"-" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center text-secondary py-4">No attendance records yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

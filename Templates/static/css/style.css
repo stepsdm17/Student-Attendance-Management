@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #2d5016;
+    --primary-color: #1f360ff0;
     --primary-hover: #1f360f;
     --secondary-color: #4a7c59;
     --accent-color: #759353;
@@ -191,7 +191,6 @@ body {
     vertical-align: middle;
 }
 
-/* Forms - Modern Design */
 .form-control, .form-select {
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -379,7 +378,9 @@ body {
     background-color: var(--dark-bg);
     color: white;
     padding: 20px 0;
-    margin-top: 50px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Custom Scrollbar */
