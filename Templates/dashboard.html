@@ -67,12 +67,12 @@
             <div class="card-header">
                 <h4>Quick Actions</h4>
             </div>
-            <div class="card-body">
-                <a href="{% url 'student_create' %}" class="btn btn-primary">Add New Student</a>
-                <a href="{% url 'class_create' %}" class="btn btn-primary">Add New Class</a>
-                <a href="{% url 'subject_create' %}" class="btn btn-primary">Add New Subject</a>
-                <a href="{% url 'teacher_create' %}" class="btn btn-primary">Add New Teacher</a>
-                <a href="{% url 'attendance_create' %}" class="btn btn-primary">Create Attendance Session</a>
+            <div class="card-body d-flex flex-wrap gap-2">
+                <a href="{% url 'student_create' %}" class="btn btn-primary flex-fill">Add New Student</a>
+                <a href="{% url 'class_create' %}" class="btn btn-primary flex-fill">Add New Class</a>
+                <a href="{% url 'subject_create' %}" class="btn btn-primary flex-fill">Add New Subject</a>
+                <a href="{% url 'teacher_create' %}" class="btn btn-primary flex-fill">Add New Teacher</a>
+                <a href="{% url 'attendance_create' %}" class="btn btn-primary flex-fill">Create Attendance Session</a>
             </div>
         </div>
     </div>
