@@ -2,9 +2,11 @@
 
 {% block content %}
 <h1>Attendance Sessions</h1>
+<hr style="margin: 20px 0;">
+<div class="d-flex justify-content-end">
 <a href="{% url 'attendance_create' %}" class="btn btn-primary mb-3">Create New Attendance Session</a>
-
-<table class="table table-striped">
+</div>
+<table class="table table-striped" style="margin-left: 20px; margin-right: 20px;">
     <thead>
         <tr>
             <th>Date</th>

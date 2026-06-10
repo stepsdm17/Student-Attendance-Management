@@ -101,6 +101,7 @@ body {
 /* Buttons - Dark Green Theme */
 .btn {
     border-radius: 8px;
+    display: flex;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;

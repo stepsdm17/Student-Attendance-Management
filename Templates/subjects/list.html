@@ -2,8 +2,10 @@
 
 {% block content %}
 <h1>Subjects</h1>
+<hr style="margin: 20px 0;">
+<div class="d-flex justify-content-end">
 <a href="{% url 'subject_create' %}" class="btn btn-primary mb-3">Add New Subject</a>
-
+</div>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -20,8 +22,10 @@
             <td>{{ subject.code }}</td>
             <td>{{ subject.description }}</td>
             <td>
+                <div class="d-flex gap-2">
                 <a href="{% url 'subject_detail' pk=subject.id %}" class="btn btn-sm btn-info">View</a>
                 <a href="{% url 'subject_delete' pk=subject.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
             </td>
         </tr>
         {% endfor %}
