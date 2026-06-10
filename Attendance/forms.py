@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student, ClassRoom, Subject, Teacher, Attendance, AttendanceDetail
+from .models import Student, Class, Subject, Teacher, Attendance, AttendanceDetail
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -9,9 +9,9 @@ class StudentForm(forms.ModelForm):
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
         }
 
-class ClassRoomForm(forms.ModelForm):
+class ClassForm(forms.ModelForm):
     class Meta:
-        model = ClassRoom
+        model = Class
         fields = ['class_name', 'capacity']
 
 class SubjectForm(forms.ModelForm):

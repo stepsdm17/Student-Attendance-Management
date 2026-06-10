@@ -7,8 +7,8 @@ import jwt
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.conf import settings
-from .models import Student, ClassRoom, Subject, Teacher, Attendance, AttendanceDetail
-from .forms import StudentForm, ClassRoomForm, SubjectForm, TeacherForm, AttendanceForm, AttendanceDetailForm
+from .models import Student, Class, Subject, Teacher, Attendance, AttendanceDetail
+from .forms import StudentForm, ClassForm, SubjectForm, TeacherForm, AttendanceForm, AttendanceDetailForm
 
 def login_view(request):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def logout_view(request):
 @login_required
 def dashboard(request):
     total_students = Student.objects.count()
-    total_classes = ClassRoom.objects.count()
+    total_classes = Class.objects.count()
     total_subjects = Subject.objects.count()
     total_teachers = Teacher.objects.count()
     total_attendance = Attendance.objects.count()
@@ -104,29 +104,29 @@ def student_delete(request, pk):
 # Class Views
 @login_required
 def class_list(request):
-    classes = ClassRoom.objects.all()
+    classes = Class.objects.all()
     return render(request, 'classes/list.html', {'classes': classes})
 
 @login_required
 def class_detail(request, pk):
-    class_room = get_object_or_404(ClassRoom, pk=pk)
+    class_room = get_object_or_404(Class, pk=pk)
     return render(request, 'classes/detail.html', {'class_room': class_room})
 
 @login_required
 def class_create(request):
     if request.method == 'POST':
-        form = ClassRoomForm(request.POST)
+        form = ClassForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Class created successfully')
             return redirect('class_list')
     else:
-        form = ClassRoomForm()
+        form = ClassForm()
     return render(request, 'classes/create.html', {'form': form})
 
 @login_required
 def class_delete(request, pk):
-    class_room = get_object_or_404(ClassRoom, pk=pk)
+    class_room = get_object_or_404(Class, pk=pk)
     if request.method == 'POST':
         class_room.delete()
         messages.success(request, 'Class deleted successfully')

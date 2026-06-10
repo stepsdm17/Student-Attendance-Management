@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ClassRoom',
+            name='Class',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('class_name', models.CharField(max_length=50, unique=True)),
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('session_date', models.DateField()),
                 ('status', models.CharField(choices=[('scheduled', 'Scheduled'), ('ongoing', 'Ongoing'), ('completed', 'Completed')], default='scheduled', max_length=20)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('class_room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Attendance.classroom')),
+                ('class_room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Attendance.Class')),
                 ('subject', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Attendance.subject')),
             ],
         ),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('phone', models.CharField(max_length=20, unique=True)),
                 ('date_of_birth', models.DateField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('class_room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Attendance.classroom')),
+                ('class_room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Attendance.Class')),
             ],
         ),
         migrations.CreateModel(
